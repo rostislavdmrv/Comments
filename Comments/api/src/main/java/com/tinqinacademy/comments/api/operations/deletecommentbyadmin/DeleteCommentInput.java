@@ -1,5 +1,6 @@
 package com.tinqinacademy.comments.api.operations.deletecommentbyadmin;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Getter
@@ -9,5 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class DeleteCommentInput {
+
+    @NotBlank(message = "Commend ID cannot be blank")
     private String commendId;
 }

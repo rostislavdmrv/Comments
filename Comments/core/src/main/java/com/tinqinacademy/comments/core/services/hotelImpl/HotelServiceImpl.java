@@ -5,7 +5,7 @@ import com.tinqinacademy.comments.api.operations.editcommentbyuser.EditCommentCo
 import com.tinqinacademy.comments.api.operations.editcommentbyuser.EditCommentContentOutput;
 import com.tinqinacademy.comments.api.operations.leavescommentsforcertainroom.LeaveCommentInput;
 import com.tinqinacademy.comments.api.operations.leavescommentsforcertainroom.LeaveCommentOutput;
-import com.tinqinacademy.comments.api.operations.returnsallcommentsforcertainroom.CommentOutput;
+import com.tinqinacademy.comments.api.models.output.Comment;
 import com.tinqinacademy.comments.api.operations.returnsallcommentsforcertainroom.ReturnCommentInput;
 import com.tinqinacademy.comments.api.operations.returnsallcommentsforcertainroom.ReturnCommentOutput;
 import lombok.extern.slf4j.Slf4j;
@@ -21,26 +21,26 @@ import java.util.List;
 public class HotelServiceImpl implements RoomService {
 
 
-
     @Override
     public ReturnCommentOutput retrievesAllComments(ReturnCommentInput input) {
         log.info("Start retrieving all the comments for certain room");
 
-        List<CommentOutput> randomComments = generateRandomComments();
+        List<Comment> randomComments = generateRandomComments();
 
-        ReturnCommentOutput output = ReturnCommentOutput.builder().comments(randomComments).build();
+        ReturnCommentOutput output = ReturnCommentOutput.builder()
+                .comments(randomComments)
+                .build();
         log.info("End retrieving all the comments for certain room");
-
         return output;
     }
 
 
 
-    private List<CommentOutput> generateRandomComments(){
-        List<CommentOutput> randomComments = new ArrayList<>();
+    private List<Comment> generateRandomComments(){
+        List<Comment> randomComments = new ArrayList<>();
         LocalDate today = LocalDate.now();
 
-        CommentOutput randomComment1 = CommentOutput.builder()
+        Comment randomComment1 = Comment.builder()
                 .id("1")
                 .firstName("a")
                 .lastName("b")
@@ -50,7 +50,7 @@ public class HotelServiceImpl implements RoomService {
                 .lastEditedBy("d")
                 .build();
 
-        CommentOutput randomComment2 = CommentOutput.builder()
+        Comment randomComment2 = Comment.builder()
                 .id("2")
                 .firstName("name2")
                 .lastName("name3")
@@ -70,7 +70,9 @@ public class HotelServiceImpl implements RoomService {
     public LeaveCommentOutput leaveComment(LeaveCommentInput input) {
 
         log.info("Start leaving comment");
-        LeaveCommentOutput output = LeaveCommentOutput.builder().id(input.getRoomId()).build();
+        LeaveCommentOutput output = LeaveCommentOutput.builder()
+                .id(input.getRoomId())
+                .build();
         log.info("End leaving comment");
 
         return output;
@@ -79,7 +81,9 @@ public class HotelServiceImpl implements RoomService {
     @Override
     public EditCommentContentOutput updateContentComment(EditCommentContentInput input) {
         log.info("Start updating content comment");
-        EditCommentContentOutput output = EditCommentContentOutput.builder().id(input.getContentId()).build();
+        EditCommentContentOutput output = EditCommentContentOutput.builder()
+                .id(input.getContentId())
+                .build();
         log.info("End updating content comment");
         return output;
     }

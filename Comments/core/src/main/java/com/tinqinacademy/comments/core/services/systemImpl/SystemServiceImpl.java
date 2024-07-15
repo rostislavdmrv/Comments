@@ -5,28 +5,29 @@ import com.tinqinacademy.comments.api.operations.deletecommentbyadmin.DeleteComm
 import com.tinqinacademy.comments.api.operations.deletecommentbyadmin.DeleteCommentOutput;
 import com.tinqinacademy.comments.api.operations.editcommentallbyadmin.EditCommentAllInput;
 import com.tinqinacademy.comments.api.operations.editcommentallbyadmin.EditCommentAllOutput;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class SystemServiceImpl implements SystemService {
 
-    private static final Logger log = LoggerFactory.getLogger(SystemServiceImpl.class);
 
     @Override
     public EditCommentAllOutput updateComment(EditCommentAllInput input) {
-        log.info("Start updating all comment");
-        EditCommentAllOutput output = EditCommentAllOutput.builder().id(input.getContentId()).build();
-        log.info("End updating all comment");
+        log.info("Start updating whole comment by admin");
+        EditCommentAllOutput output = EditCommentAllOutput.builder()
+                .id(input.getContentId())
+                .build();
+        log.info("End updating whole comment by admin");
         return output;
     }
 
     @Override
     public DeleteCommentOutput deleteComment(DeleteCommentInput input) {
-        log.info("Start deleting all comment");
+        log.info("Start deleting whole comment by admin");
         DeleteCommentOutput output = DeleteCommentOutput.builder().build();
-        log.info("End deleting all comment");
+        log.info("End deleting whole comment by admin");
         return output;
     }
 }

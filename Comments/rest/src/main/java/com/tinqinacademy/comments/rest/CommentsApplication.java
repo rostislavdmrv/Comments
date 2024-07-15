@@ -6,6 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "com.tinqinacademy.comments")
+
 public class CommentsApplication {
 
 	public static void main(String[] args) {
