@@ -2,7 +2,7 @@ package com.tinqinacademy.comments.rest.restapiroutes;
 
 public class RestApiRoutes {
 
-    private final static String API = "api/v1";
+    private final static String API = "/api/v1";
     public final static String API_HOTEL = API + "/hotel";
     public final static String API_SYSTEM = API + "/system";
     public final static String COMMENT = "/comment";
