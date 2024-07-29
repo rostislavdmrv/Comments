@@ -4,19 +4,8 @@ networks:
   net1:
 
 services:
-  app:
-    container_name: rostislav-comments-app
-    platform: linux/x86_64
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    networks:
-      - net1
-
   db:
-    container_name: rostislav-comments-db
+    container_name: rostislav-comment-db
     image: postgres:latest
     ports:
       - 5432:5432
