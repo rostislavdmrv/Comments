@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Comment {
+public class CommentInf {
 
     @NotBlank(message = "ID cannot be blank")
     private String id;

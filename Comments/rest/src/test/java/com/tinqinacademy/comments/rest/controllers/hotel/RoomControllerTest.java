@@ -2,11 +2,8 @@ package com.tinqinacademy.comments.rest.controllers.hotel;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tinqinacademy.comments.api.interfaces.room.RoomService;
-import com.tinqinacademy.comments.api.models.output.Comment;
 import com.tinqinacademy.comments.api.operations.leavescommentsforcertainroom.LeaveCommentInput;
 import com.tinqinacademy.comments.api.operations.leavescommentsforcertainroom.LeaveCommentOutput;
-import com.tinqinacademy.comments.rest.config.JacksonConfiguration;
-import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -16,11 +13,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import static com.tinqinacademy.comments.rest.restapiroutes.RestApiRoutes.USER_LEAVE_COMMENT;
 import static com.tinqinacademy.comments.rest.restapiroutes.RestApiRoutes.USER_RETRIEVE_ALL_COMMENTS;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

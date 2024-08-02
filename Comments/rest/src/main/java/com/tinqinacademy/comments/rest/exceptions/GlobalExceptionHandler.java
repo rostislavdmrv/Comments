@@ -1,6 +1,6 @@
 package com.tinqinacademy.comments.rest.exceptions;
 
-import com.tinqinacademy.comments.api.errors.ErrorWrapper;
+import com.tinqinacademy.comments.api.models.error.ErrorWrapper;
 import com.tinqinacademy.comments.api.interfaces.exception.ErrorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

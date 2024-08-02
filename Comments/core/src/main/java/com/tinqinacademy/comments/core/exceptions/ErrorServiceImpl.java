@@ -1,8 +1,8 @@
 package com.tinqinacademy.comments.core.exceptions;
 
 import com.tinqinacademy.comments.api.interfaces.exception.ErrorService;
-import com.tinqinacademy.comments.api.errors.ErrorWrapper;
-import com.tinqinacademy.comments.api.errors.ErrorsResponse;
+import com.tinqinacademy.comments.api.models.error.ErrorWrapper;
+import com.tinqinacademy.comments.api.models.error.ErrorsResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.MethodArgumentNotValidException;

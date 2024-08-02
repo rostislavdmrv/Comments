@@ -1,5 +1,6 @@
 package com.tinqinacademy.comments.api.operations.returnsallcommentsforcertainroom;
 
+import com.tinqinacademy.comments.api.base.OperationInput;
 import lombok.*;
 
 @Getter
@@ -8,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ReturnCommentInput {
+public class ReturnCommentInput implements OperationInput {
 
     private String roomId;
 }

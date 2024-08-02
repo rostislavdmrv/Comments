@@ -1,6 +1,7 @@
 package com.tinqinacademy.comments.api.operations.returnsallcommentsforcertainroom;
 
-import com.tinqinacademy.comments.api.models.output.Comment;
+import com.tinqinacademy.comments.api.base.OperationOutput;
+import com.tinqinacademy.comments.api.models.output.CommentInf;
 import lombok.*;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ReturnCommentOutput {
+public class ReturnCommentOutput implements OperationOutput {
 
-    private List<Comment> comments;
+    private List<CommentInf> comments;
 }

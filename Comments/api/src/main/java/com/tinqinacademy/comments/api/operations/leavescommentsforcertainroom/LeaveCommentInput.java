@@ -1,5 +1,7 @@
 package com.tinqinacademy.comments.api.operations.leavescommentsforcertainroom;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tinqinacademy.comments.api.base.OperationInput;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -10,10 +12,10 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class LeaveCommentInput {
+public class LeaveCommentInput  implements OperationInput {
 
 
-    @NotBlank(message = "Room ID cannot be blank")
+    @JsonIgnore
     private String roomId;
 
     @NotBlank(message = "First name cannot be blank")
