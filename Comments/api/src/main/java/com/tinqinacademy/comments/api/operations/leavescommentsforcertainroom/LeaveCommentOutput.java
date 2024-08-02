@@ -1,5 +1,6 @@
 package com.tinqinacademy.comments.api.operations.leavescommentsforcertainroom;
 
+import com.tinqinacademy.comments.api.base.OperationOutput;
 import lombok.*;
 
 @Getter
@@ -8,6 +9,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class LeaveCommentOutput {
+public class LeaveCommentOutput implements OperationOutput {
     private String id;
 }

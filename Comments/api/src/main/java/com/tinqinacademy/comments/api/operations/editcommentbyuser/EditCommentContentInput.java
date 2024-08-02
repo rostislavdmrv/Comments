@@ -1,6 +1,7 @@
 package com.tinqinacademy.comments.api.operations.editcommentbyuser;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tinqinacademy.comments.api.base.OperationInput;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -11,10 +12,9 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class EditCommentContentInput {
+public class EditCommentContentInput implements OperationInput {
 
     @JsonIgnore
-    @NotBlank(message = "Commend ID cannot be blank")
     private String contentId;
 
     @NotBlank(message = "Content name cannot be blank")

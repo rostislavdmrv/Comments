@@ -1,12 +1,12 @@
 package com.tinqinacademy.comments.api.operations.deletecommentbyadmin;
 
+import com.tinqinacademy.comments.api.base.OperationOutput;
 import lombok.*;
 
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
-//@AllArgsConstructor
 @Builder
-public class DeleteCommentOutput {
+public class DeleteCommentOutput implements OperationOutput {
 }

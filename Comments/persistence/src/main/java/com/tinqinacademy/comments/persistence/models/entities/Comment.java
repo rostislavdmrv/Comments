@@ -2,7 +2,9 @@ package com.tinqinacademy.comments.persistence.models.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
@@ -11,7 +13,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 @Entity
 @Table(name = "comments")
 public class Comment {
@@ -19,13 +20,26 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "room_no", nullable = false, unique = true,length = 10)
-    private String roomNo;
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
 
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
 
     @Column(name = "content", nullable = false)
     private String content;
 
-    @ManyToOne
-    private Article article;
+    @Column(name = "room_id", nullable = false)
+    private UUID roomId;
+
+    @CreationTimestamp
+    @Column(name = "publish_date", updatable = false)
+    private LocalDateTime publishDate;
+
+    @UpdateTimestamp
+    @Column(name = "last_edited_date")
+    private LocalDateTime lastEditedDate;
+
+    @Column(name = "last_edited_by")
+    private UUID lastEditedBy;
 }

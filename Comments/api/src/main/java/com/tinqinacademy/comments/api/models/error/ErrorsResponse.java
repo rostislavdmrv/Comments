@@ -1,4 +1,4 @@
-package com.tinqinacademy.comments.api.errors;
+package com.tinqinacademy.comments.api.models.error;
 
 import lombok.*;
 

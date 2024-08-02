@@ -1,5 +1,6 @@
 package com.tinqinacademy.comments.api.operations.editcommentallbyadmin;
 
+import com.tinqinacademy.comments.api.base.OperationInput;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -10,9 +11,9 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class EditCommentAllInput {
+public class EditCommentAllInput implements OperationInput {
     @NotBlank(message = "Comment ID cannot be blank")
-    private String contentId;
+    private String commentId;
 
     @NotBlank(message = "Room number cannot be blank")
     @Size(min = 1, max = 10, message = "Room number cannot exceed 10 characters" )
