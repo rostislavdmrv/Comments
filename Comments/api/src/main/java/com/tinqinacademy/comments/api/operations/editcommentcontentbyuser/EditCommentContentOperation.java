@@ -1,4 +1,4 @@
-package com.tinqinacademy.comments.api.operations.editcommentbyuser;
+package com.tinqinacademy.comments.api.operations.editcommentcontentbyuser;
 
 import com.tinqinacademy.comments.api.base.OperationProcessor;
 

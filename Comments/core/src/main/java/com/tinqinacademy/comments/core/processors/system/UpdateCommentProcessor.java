@@ -1,6 +1,6 @@
 package com.tinqinacademy.comments.core.processors.system;
 
-import com.tinqinacademy.comments.api.errors.ErrorHandler;
+import com.tinqinacademy.comments.core.errorhandler.ErrorHandler;
 import com.tinqinacademy.comments.api.exceptions.ResourceNotFoundException;
 import com.tinqinacademy.comments.api.models.error.ErrorWrapper;
 import com.tinqinacademy.comments.api.operations.editcommentallbyadmin.EditCommentAllInput;
@@ -21,15 +21,11 @@ import java.util.UUID;
 
 @Service
 @Slf4j
-public class UpdateCommentProcessor extends BaseOperationProcessor implements EditCommentWholeOperation {
+public class UpdateCommentProcessor extends BaseOperationProcessor<EditCommentAllInput, EditCommentAllOutput> implements EditCommentWholeOperation {
 
-    private final CommentRepository commentRepository;
-    private final ErrorHandler errorHandler;
 
-    protected UpdateCommentProcessor(ConversionService conversionService, Validator validator, CommentRepository commentRepository, ErrorHandler errorHandler) {
-        super(conversionService, validator);
-        this.commentRepository = commentRepository;
-        this.errorHandler = errorHandler;
+    protected UpdateCommentProcessor(ConversionService conversionService, Validator validator, ErrorHandler errorHandler, CommentRepository commentRepository) {
+        super(conversionService, validator, errorHandler, commentRepository);
     }
 
     @Override
@@ -37,6 +33,7 @@ public class UpdateCommentProcessor extends BaseOperationProcessor implements Ed
         log.info("Start updating whole comment by admin");
 
         return Try.of(() -> {
+                    validateInput(input);
                     Comment comment = retrieveComment(input.getCommentId());
                     updateCommentDetails(comment, input);
                     Comment updatedComment = saveComment(comment);
@@ -49,6 +46,7 @@ public class UpdateCommentProcessor extends BaseOperationProcessor implements Ed
                 .toEither()
                 .mapLeft(errorHandler::handleErrors);
     }
+
     private Comment retrieveComment(String commentId) {
         UUID id = UUID.fromString(commentId);
         return commentRepository.findById(id)

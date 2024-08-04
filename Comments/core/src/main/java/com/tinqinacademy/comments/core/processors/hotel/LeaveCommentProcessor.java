@@ -1,6 +1,6 @@
 package com.tinqinacademy.comments.core.processors.hotel;
 
-import com.tinqinacademy.comments.api.errors.ErrorHandler;
+import com.tinqinacademy.comments.core.errorhandler.ErrorHandler;
 import com.tinqinacademy.comments.api.models.error.ErrorWrapper;
 import com.tinqinacademy.comments.api.operations.leavescommentsforcertainroom.LeaveCommentInput;
 import com.tinqinacademy.comments.api.operations.leavescommentsforcertainroom.LeaveCommentOperation;
@@ -17,15 +17,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
-public class LeaveCommentProcessor extends BaseOperationProcessor implements LeaveCommentOperation {
+public class LeaveCommentProcessor extends BaseOperationProcessor<LeaveCommentInput, LeaveCommentOutput> implements LeaveCommentOperation {
 
-    private final CommentRepository commentRepository;
-    private final ErrorHandler errorHandler;
 
-    protected LeaveCommentProcessor(ConversionService conversionService, Validator validator, CommentRepository commentRepository, ErrorHandler errorHandler) {
-        super(conversionService, validator);
-        this.commentRepository = commentRepository;
-        this.errorHandler = errorHandler;
+    protected LeaveCommentProcessor(ConversionService conversionService, Validator validator, ErrorHandler errorHandler, CommentRepository commentRepository) {
+        super(conversionService, validator, errorHandler, commentRepository);
     }
 
     @Override
@@ -33,6 +29,7 @@ public class LeaveCommentProcessor extends BaseOperationProcessor implements Lea
         log.info("Start leaving comment");
 
         return Try.of(() -> {
+                    validateInput(input);
                     Comment comment = convertInputToComment(input);
                     Comment savedComment = saveComment(comment);
                     LeaveCommentOutput output = buildLeaveCommentOutput(savedComment);

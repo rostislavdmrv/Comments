@@ -1,6 +1,4 @@
 package com.tinqinacademy.comments.rest.controllers.system;
-
-import com.tinqinacademy.comments.api.interfaces.system.SystemService;
 import com.tinqinacademy.comments.api.operations.deletecommentbyadmin.DeleteCommentInput;
 import com.tinqinacademy.comments.api.operations.deletecommentbyadmin.DeleteCommentOperation;
 import com.tinqinacademy.comments.api.operations.editcommentallbyadmin.EditCommentAllInput;
@@ -10,6 +8,7 @@ import com.tinqinacademy.comments.rest.restapiroutes.RestApiRoutes;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "System - Comments - REST APIs")
 public class SystemController extends BaseController {
 
-    private final SystemService systemService;
     private final EditCommentWholeOperation editCommentWholeOperation;
     private final DeleteCommentOperation deleteCommentOperation;
 

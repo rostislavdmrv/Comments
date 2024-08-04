@@ -1,6 +1,6 @@
 package com.tinqinacademy.comments.core.processors.system;
 
-import com.tinqinacademy.comments.api.errors.ErrorHandler;
+import com.tinqinacademy.comments.core.errorhandler.ErrorHandler;
 import com.tinqinacademy.comments.api.exceptions.ResourceNotFoundException;
 import com.tinqinacademy.comments.api.models.error.ErrorWrapper;
 import com.tinqinacademy.comments.api.operations.deletecommentbyadmin.DeleteCommentInput;
@@ -20,15 +20,11 @@ import java.util.UUID;
 
 @Service
 @Slf4j
-public class DeleteCommentProcessor extends BaseOperationProcessor implements DeleteCommentOperation {
+public class DeleteCommentProcessor extends BaseOperationProcessor<DeleteCommentInput, DeleteCommentOutput> implements DeleteCommentOperation {
 
-    private final CommentRepository commentRepository;
-    private final ErrorHandler errorHandler;
 
-    protected DeleteCommentProcessor(ConversionService conversionService, Validator validator, CommentRepository commentRepository, ErrorHandler errorHandler) {
-        super(conversionService, validator);
-        this.commentRepository = commentRepository;
-        this.errorHandler = errorHandler;
+    protected DeleteCommentProcessor(ConversionService conversionService, Validator validator, ErrorHandler errorHandler, CommentRepository commentRepository) {
+        super(conversionService, validator, errorHandler, commentRepository);
     }
 
     @Override
@@ -36,6 +32,7 @@ public class DeleteCommentProcessor extends BaseOperationProcessor implements De
         log.info("Start deleting whole comment by admin");
 
         return Try.of(() -> {
+                    validateInput(input);
                     Comment comment = retrieveComment(input.getCommendId());
                     deleteComment(comment);
                     DeleteCommentOutput output = buildDeleteCommentOutput();
@@ -45,6 +42,7 @@ public class DeleteCommentProcessor extends BaseOperationProcessor implements De
                 .toEither()
                 .mapLeft(errorHandler::handleErrors);
     }
+
     private Comment retrieveComment(String commentId) {
         UUID id = UUID.fromString(commentId);
         return commentRepository.findById(id)
