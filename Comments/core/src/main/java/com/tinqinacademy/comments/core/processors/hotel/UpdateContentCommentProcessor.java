@@ -4,12 +4,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fge.jsonpatch.JsonPatchException;
 import com.github.fge.jsonpatch.mergepatch.JsonMergePatch;
-import com.tinqinacademy.comments.api.errors.ErrorHandler;
+import com.tinqinacademy.comments.core.errorhandler.ErrorHandler;
 import com.tinqinacademy.comments.api.exceptions.ResourceNotFoundException;
 import com.tinqinacademy.comments.api.models.error.ErrorWrapper;
-import com.tinqinacademy.comments.api.operations.editcommentbyuser.EditCommentContentInput;
-import com.tinqinacademy.comments.api.operations.editcommentbyuser.EditCommentContentOperation;
-import com.tinqinacademy.comments.api.operations.editcommentbyuser.EditCommentContentOutput;
+import com.tinqinacademy.comments.api.operations.editcommentcontentbyuser.EditCommentContentInput;
+import com.tinqinacademy.comments.api.operations.editcommentcontentbyuser.EditCommentContentOperation;
+import com.tinqinacademy.comments.api.operations.editcommentcontentbyuser.EditCommentContentOutput;
 import com.tinqinacademy.comments.core.processors.base.BaseOperationProcessor;
 import com.tinqinacademy.comments.persistence.models.entities.Comment;
 import com.tinqinacademy.comments.persistence.repositories.CommentRepository;
@@ -25,25 +25,21 @@ import java.util.UUID;
 
 @Service
 @Slf4j
-public class UpdateContentCommentProcessor extends BaseOperationProcessor implements EditCommentContentOperation {
-
-    private final CommentRepository commentRepository;
+public class UpdateContentCommentProcessor extends BaseOperationProcessor<EditCommentContentInput, EditCommentContentOutput> implements EditCommentContentOperation {
     private final ObjectMapper objectMapper;
-    private final ErrorHandler errorHandler;
 
-
-    protected UpdateContentCommentProcessor(ConversionService conversionService, Validator validator, CommentRepository commentRepository, ObjectMapper objectMapper, ErrorHandler errorHandler) {
-        super(conversionService, validator);
-        this.commentRepository = commentRepository;
+    protected UpdateContentCommentProcessor(ConversionService conversionService, Validator validator, ErrorHandler errorHandler, CommentRepository commentRepository, ObjectMapper objectMapper) {
+        super(conversionService, validator, errorHandler, commentRepository);
         this.objectMapper = objectMapper;
-        this.errorHandler = errorHandler;
     }
+
 
     @Override
     public Either<ErrorWrapper, EditCommentContentOutput> process(EditCommentContentInput input) {
         log.info("Start updating content comment");
 
         return Try.of(() -> {
+                    validateInput(input);
                     Comment comment = retrieveComment(input.getContentId());
                     JsonNode patchedNode = applyPatchToComment(comment, input);
                     Comment patchedComment = objectMapper.treeToValue(patchedNode, Comment.class);
@@ -55,6 +51,7 @@ public class UpdateContentCommentProcessor extends BaseOperationProcessor implem
                 .toEither()
                 .mapLeft(errorHandler::handleErrors);
     }
+
     private Comment retrieveComment(String contentId) {
         UUID commentId = UUID.fromString(contentId);
         return commentRepository.findById(commentId)

@@ -31,6 +31,8 @@
 		<java.version>21</java.version>
 		<jackson.version>2.16.0</jackson.version>
 		<swagger.version>2.6.0</swagger.version>
+		<vavr.version>0.10.4</vavr.version>
+		<flattenpom.version>1.2.7</flattenpom.version>
 	</properties>
 
 
@@ -62,7 +64,7 @@
 		<dependency>
 			<groupId>io.vavr</groupId>
 			<artifactId>vavr</artifactId>
-			<version>0.10.4</version>
+			<version>${vavr.version}</version>
 		</dependency>
 
 	</dependencies>
@@ -72,7 +74,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>flatten-maven-plugin</artifactId>
-				<version>1.2.7</version> <!-- Use the latest version -->
+				<version>${flattenpom.version}</version>
 				<executions>
 					<execution>
 						<goals>

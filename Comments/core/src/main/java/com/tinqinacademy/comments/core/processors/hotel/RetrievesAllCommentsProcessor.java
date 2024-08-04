@@ -1,6 +1,6 @@
 package com.tinqinacademy.comments.core.processors.hotel;
 
-import com.tinqinacademy.comments.api.errors.ErrorHandler;
+import com.tinqinacademy.comments.core.errorhandler.ErrorHandler;
 import com.tinqinacademy.comments.api.models.error.ErrorWrapper;
 import com.tinqinacademy.comments.api.models.output.CommentInf;
 import com.tinqinacademy.comments.api.operations.returnsallcommentsforcertainroom.ReturnCommentInput;
@@ -21,16 +21,11 @@ import java.util.UUID;
 
 @Service
 @Slf4j
-public class RetrievesAllCommentsProcessor extends BaseOperationProcessor implements ReturnCommentOperation {
-
-    private final CommentRepository commentRepository;
-    private final ErrorHandler errorHandler;
+public class RetrievesAllCommentsProcessor extends BaseOperationProcessor<ReturnCommentInput, ReturnCommentOutput> implements ReturnCommentOperation {
 
 
-    protected RetrievesAllCommentsProcessor(ConversionService conversionService, Validator validator, CommentRepository commentRepository, ErrorHandler errorHandler) {
-        super(conversionService, validator);
-        this.commentRepository = commentRepository;
-        this.errorHandler = errorHandler;
+    protected RetrievesAllCommentsProcessor(ConversionService conversionService, Validator validator, ErrorHandler errorHandler, CommentRepository commentRepository) {
+        super(conversionService, validator, errorHandler, commentRepository);
     }
 
     @Override
@@ -38,6 +33,7 @@ public class RetrievesAllCommentsProcessor extends BaseOperationProcessor implem
         log.info("Start retrieving all the comments for certain room");
 
         return Try.of(() -> {
+                    validateInput(input);
                     List<Comment> comments = retrieveComments(input);
                     List<CommentInf> commentInputs = convertCommentsToCommentInf(comments);
 
@@ -45,13 +41,14 @@ public class RetrievesAllCommentsProcessor extends BaseOperationProcessor implem
                             .comments(commentInputs)
                             .build();
 
-                    log.info("End retrieving all the comments for certain room {}",output);
+                    log.info("End retrieving all the comments for certain room {}", output);
                     return output;
 
                 })
                 .toEither()
                 .mapLeft(errorHandler::handleErrors);
     }
+
     private List<Comment> retrieveComments(ReturnCommentInput input) {
         return commentRepository.findByRoomId(UUID.fromString(input.getRoomId()));
     }

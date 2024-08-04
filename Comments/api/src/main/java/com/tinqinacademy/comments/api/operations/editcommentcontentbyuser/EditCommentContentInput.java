@@ -1,4 +1,4 @@
-package com.tinqinacademy.comments.api.operations.editcommentbyuser;
+package com.tinqinacademy.comments.api.operations.editcommentcontentbyuser;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tinqinacademy.comments.api.base.OperationInput;

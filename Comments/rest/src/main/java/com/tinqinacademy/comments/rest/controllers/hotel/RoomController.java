@@ -1,21 +1,16 @@
 package com.tinqinacademy.comments.rest.controllers.hotel;
-
-import com.tinqinacademy.comments.api.interfaces.room.RoomService;
-import com.tinqinacademy.comments.api.operations.editcommentbyuser.EditCommentContentInput;
-import com.tinqinacademy.comments.api.operations.editcommentbyuser.EditCommentContentOperation;
-import com.tinqinacademy.comments.api.operations.editcommentbyuser.EditCommentContentOutput;
+import com.tinqinacademy.comments.api.operations.editcommentcontentbyuser.EditCommentContentInput;
+import com.tinqinacademy.comments.api.operations.editcommentcontentbyuser.EditCommentContentOperation;
 import com.tinqinacademy.comments.api.operations.leavescommentsforcertainroom.LeaveCommentInput;
 import com.tinqinacademy.comments.api.operations.leavescommentsforcertainroom.LeaveCommentOperation;
-import com.tinqinacademy.comments.api.operations.leavescommentsforcertainroom.LeaveCommentOutput;
 import com.tinqinacademy.comments.api.operations.returnsallcommentsforcertainroom.ReturnCommentInput;
 import com.tinqinacademy.comments.api.operations.returnsallcommentsforcertainroom.ReturnCommentOperation;
-import com.tinqinacademy.comments.api.operations.returnsallcommentsforcertainroom.ReturnCommentOutput;
 import com.tinqinacademy.comments.rest.controllers.base.BaseController;
 import com.tinqinacademy.comments.rest.restapiroutes.RestApiRoutes;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import jakarta.validation.Valid;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,9 +19,9 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "Room - Comments - REST APIs")
 public class RoomController extends BaseController {
 
-    private final RoomService roomService;
     private final ReturnCommentOperation returnCommentOperation;
     private final LeaveCommentOperation leaveCommentOperation;
     private final EditCommentContentOperation editCommentContentOperation;
