@@ -4,7 +4,7 @@ import com.tinqinacademy.comments.api.operations.deletecommentbyadmin.DeleteComm
 import com.tinqinacademy.comments.api.operations.editcommentallbyadmin.EditCommentAllInput;
 import com.tinqinacademy.comments.api.operations.editcommentallbyadmin.EditCommentWholeOperation;
 import com.tinqinacademy.comments.rest.controllers.base.BaseController;
-import com.tinqinacademy.comments.rest.restapiroutes.RestApiRoutes;
+import com.tinqinacademy.comments.api.restapiroutes.RestApiRoutes;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

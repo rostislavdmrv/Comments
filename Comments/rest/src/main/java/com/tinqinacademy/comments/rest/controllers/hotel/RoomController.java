@@ -6,7 +6,7 @@ import com.tinqinacademy.comments.api.operations.leavescommentsforcertainroom.Le
 import com.tinqinacademy.comments.api.operations.returnsallcommentsforcertainroom.ReturnCommentInput;
 import com.tinqinacademy.comments.api.operations.returnsallcommentsforcertainroom.ReturnCommentOperation;
 import com.tinqinacademy.comments.rest.controllers.base.BaseController;
-import com.tinqinacademy.comments.rest.restapiroutes.RestApiRoutes;
+import com.tinqinacademy.comments.api.restapiroutes.RestApiRoutes;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

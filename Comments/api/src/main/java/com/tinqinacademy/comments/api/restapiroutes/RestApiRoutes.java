@@ -1,4 +1,4 @@
-package com.tinqinacademy.comments.rest.restapiroutes;
+package com.tinqinacademy.comments.api.restapiroutes;
 
 public class RestApiRoutes {
 
