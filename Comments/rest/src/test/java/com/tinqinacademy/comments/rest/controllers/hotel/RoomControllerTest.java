@@ -1,8 +1,8 @@
 package com.tinqinacademy.comments.rest.controllers.hotel;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tinqinacademy.comments.api.interfaces.room.RoomService;
 import com.tinqinacademy.comments.api.operations.leavescommentsforcertainroom.LeaveCommentInput;
+import com.tinqinacademy.comments.api.operations.leavescommentsforcertainroom.LeaveCommentOperation;
 import com.tinqinacademy.comments.api.operations.leavescommentsforcertainroom.LeaveCommentOutput;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +14,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
 
-import static com.tinqinacademy.comments.rest.restapiroutes.RestApiRoutes.USER_LEAVE_COMMENT;
-import static com.tinqinacademy.comments.rest.restapiroutes.RestApiRoutes.USER_RETRIEVE_ALL_COMMENTS;
+import static com.tinqinacademy.comments.api.restapiroutes.RestApiRoutes.USER_LEAVE_COMMENT;
+import static com.tinqinacademy.comments.api.restapiroutes.RestApiRoutes.USER_RETRIEVE_ALL_COMMENTS;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -33,7 +33,7 @@ class RoomControllerTest {
     private ObjectMapper objectMapper;
 
     @MockBean
-    private RoomService roomService ;
+    private LeaveCommentOperation leaveCommentOperation;
 
 
 
@@ -81,7 +81,7 @@ class RoomControllerTest {
                 .id("123")
                 .build();
 
-        when(roomService.leaveComment(any(LeaveCommentInput.class))).thenReturn(output);
+        when(leaveCommentOperation.process(any(LeaveCommentInput.class)));
 
         mockMvc.perform(post(USER_LEAVE_COMMENT, "123")
                         .contentType(MediaType.APPLICATION_JSON)

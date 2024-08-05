@@ -1,4 +1,4 @@
-package com.tinqinacademy.comments.rest.config;
+package com.tinqinacademy.comments.api.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
