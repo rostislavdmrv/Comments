@@ -3,16 +3,18 @@ package com.tinqinacademy.comments.api.restapiroutes;
 public class RestApiRoutes {
 
     private final static String API = "/api/v1";
-    public final static String API_HOTEL = API + "/hotel";
-    public final static String API_SYSTEM = API + "/system";
+    public final static String HOTEL = API + "/hotel";
+    public final static String SYSTEM = API + "/system";
     public final static String COMMENT = "/comment";
+    public final static String COMMENT_ID = "/{commentId}";
+    public final static String ROOM_ID = "/{roomId}";
 
-    public final static String USER_RETRIEVE_ALL_COMMENTS = API_HOTEL + "/{roomId}" + COMMENT;
-    public final static String USER_LEAVE_COMMENT = API_HOTEL + "/{roomId}" + COMMENT;
-    public final static String USER_UPDATE_COMMENT_CONTENT = API_HOTEL + "/{commentId}/comment";
+    public final static String RETRIEVE_ALL_COMMENTS = HOTEL + ROOM_ID + COMMENT;
+    public final static String LEAVE_COMMENT = HOTEL + ROOM_ID + COMMENT;
+    public final static String UPDATE_COMMENT_CONTENT = HOTEL + COMMENT_ID+ COMMENT;
 
-    public static final String ADMIN_UPDATE = API_SYSTEM + COMMENT + "/{commentId}";
-    public static final String ADMIN_DELETE = API_SYSTEM + COMMENT + "/{commentId}";
+    public static final String UPDATE_COMMENT = SYSTEM + COMMENT + COMMENT_ID;
+    public static final String DELETE_COMMENT = SYSTEM + COMMENT + COMMENT_ID;
 
 
 }

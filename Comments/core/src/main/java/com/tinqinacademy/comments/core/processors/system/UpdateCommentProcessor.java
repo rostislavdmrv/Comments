@@ -35,11 +35,11 @@ public class UpdateCommentProcessor extends BaseOperationProcessor<EditCommentAl
         return Try.of(() -> {
                     validateInput(input);
                     Comment comment = retrieveComment(input.getCommentId());
-                    updateCommentDetails(comment, input);
-                    Comment updatedComment = saveComment(comment);
+                    Comment commentToUpdate = conversionService.convert(comment, Comment.CommentBuilder.class)
+                            .publishDate(comment.getPublishDate()).build();
 
-                    EditCommentAllOutput output = buildEditCommentAllOutput(updatedComment);
-
+                    Comment updatedComment = saveComment(commentToUpdate);
+                    EditCommentAllOutput output = conversionService.convert(updatedComment, EditCommentAllOutput.class);
                     log.info("End updating whole comment by admin");
                     return output;
                 })
@@ -53,21 +53,10 @@ public class UpdateCommentProcessor extends BaseOperationProcessor<EditCommentAl
                 .orElseThrow(() -> new ResourceNotFoundException("Comment", "commentId", id.toString()));
     }
 
-    private void updateCommentDetails(Comment comment, EditCommentAllInput input) {
-        comment.setFirstName(input.getFirstName());
-        comment.setLastName(input.getLastName());
-        comment.setContent(input.getContent());
-        comment.setLastEditedDate(LocalDateTime.now());
-        comment.setLastEditedBy(UUID.randomUUID());
-    }
 
     private Comment saveComment(Comment comment) {
         return commentRepository.save(comment);
     }
 
-    private EditCommentAllOutput buildEditCommentAllOutput(Comment updatedComment) {
-        return EditCommentAllOutput.builder()
-                .id(updatedComment.getId().toString())
-                .build();
-    }
+
 }

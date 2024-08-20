@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import org.hibernate.validator.constraints.UUID;
 
 import java.time.LocalDate;
 
@@ -19,13 +20,9 @@ public class CommentInf {
     @NotBlank(message = "ID cannot be blank")
     private String id;
 
-    @NotBlank(message = "First name cannot be blank")
-    @Size(min = 2,max = 30, message = "First name cannot exceed 30 characters")
-    private String firstName;
-
-    @NotBlank(message = "Last name cannot be blank")
-    @Size(min =2,max = 30, message = "Last name cannot exceed 30 characters")
-    private String lastName;
+    @NotBlank
+    @UUID
+    private String userId;
 
     @NotBlank(message = "Content name cannot be blank")
     @Size(min =2,max = 100, message = "content name cannot exceed 100 characters")
@@ -44,3 +41,5 @@ public class CommentInf {
     private String lastEditedBy;
 
 }
+
+

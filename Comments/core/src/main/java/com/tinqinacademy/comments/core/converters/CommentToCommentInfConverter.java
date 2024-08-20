@@ -12,14 +12,15 @@ public class CommentToCommentInfConverter implements Converter<Comment, CommentI
     @Override
     public CommentInf convert(Comment source) {
         log.info("Start convert comment !");
-        CommentInf commentInf = CommentInf.builder()
-                .firstName(source.getFirstName())
-                .lastName(source.getLastName())
+        CommentInf output = CommentInf.builder()
+                .id(source.getId().toString())
+                .userId(source.getUserId().toString())
                 .content(source.getContent())
                 .lastEditedDate(source.getLastEditedDate().toLocalDate())
                 .publishDate(source.getPublishDate().toLocalDate())
-                .lastEditedBy(source.getLastEditedBy().toString()).build();
+                .lastEditedBy(source.getLastEditedBy().toString())
+                .build();
         log.info("End convert comment !");
-        return commentInf;
+        return output;
     }
 }

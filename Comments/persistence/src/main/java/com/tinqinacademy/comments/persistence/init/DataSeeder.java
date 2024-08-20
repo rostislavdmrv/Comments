@@ -38,32 +38,23 @@ public class DataSeeder implements ApplicationRunner {
         }
 
         Comment comment1 = Comment.builder()
-                .firstName("Alice")
-                .lastName("Smith")
+                .userId(UUID.randomUUID())
                 .content("This is a sample comment.")
                 .roomId(UUID.randomUUID())
-                .publishDate(LocalDateTime.now())
-                .lastEditedDate(LocalDateTime.now())
                 .lastEditedBy(UUID.randomUUID())
                 .build();
 
         Comment comment2 = Comment.builder()
-                .firstName("Bob")
-                .lastName("Johnson")
+                .userId(UUID.randomUUID())
                 .content("Another example of a comment.")
                 .roomId(UUID.randomUUID())
-                .publishDate(LocalDateTime.now())
-                .lastEditedDate(LocalDateTime.now())
                 .lastEditedBy(UUID.randomUUID())
                 .build();
 
         Comment comment3 = Comment.builder()
-                .firstName("Carol")
-                .lastName("Williams")
+                .userId(UUID.randomUUID())
                 .content("Yet another comment for testing.")
                 .roomId(UUID.randomUUID())
-                .publishDate(LocalDateTime.now())
-                .lastEditedDate(LocalDateTime.now())
                 .lastEditedBy(UUID.randomUUID())
                 .build();
 
@@ -71,6 +62,7 @@ public class DataSeeder implements ApplicationRunner {
         commentRepository.saveAll(comments);
         log.info("CommentDataSeeder - seeded comments.");
     }
+
 
 
 }
