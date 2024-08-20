@@ -40,11 +40,11 @@ public class UpdateContentCommentProcessor extends BaseOperationProcessor<EditCo
 
         return Try.of(() -> {
                     validateInput(input);
-                    Comment comment = retrieveComment(input.getContentId());
+                    Comment comment = retrieveComment(input.getCommentId());
                     JsonNode patchedNode = applyPatchToComment(comment, input);
                     Comment patchedComment = objectMapper.treeToValue(patchedNode, Comment.class);
-                    commentRepository.save(patchedComment);
-                    EditCommentContentOutput output = buildEditCommentContentOutput(input.getContentId());
+                    Comment saved = commentRepository.save(patchedComment);
+                    EditCommentContentOutput output = conversionService.convert(saved, EditCommentContentOutput.class);
                     log.info("End updating content comment");
                     return output;
                 })
@@ -66,10 +66,6 @@ public class UpdateContentCommentProcessor extends BaseOperationProcessor<EditCo
         return patch.apply(commentNode);
     }
 
-    private EditCommentContentOutput buildEditCommentContentOutput(String contentId) {
-        return EditCommentContentOutput.builder()
-                .id(contentId)
-                .build();
-    }
+
 
 }

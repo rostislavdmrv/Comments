@@ -31,7 +31,7 @@ public class SystemController extends BaseController {
             @ApiResponse(responseCode = "404", description = "Room or comment not found")
     })
 
-    @PutMapping(RestApiRoutes.ADMIN_UPDATE)
+    @PutMapping(RestApiRoutes.UPDATE_COMMENT)
     public ResponseEntity<?> updateComment(@PathVariable("commentId") String commentId,@RequestBody EditCommentAllInput input) {
 
         EditCommentAllInput updatedInput = input.toBuilder().commentId(commentId).build();
@@ -46,7 +46,7 @@ public class SystemController extends BaseController {
             @ApiResponse(responseCode = "403", description = "Forbidden: You don't have permission to delete comments for this room"),
             @ApiResponse(responseCode = "404", description = "Room or comment not found")
     })
-    @DeleteMapping(RestApiRoutes.ADMIN_DELETE)
+    @DeleteMapping(RestApiRoutes.DELETE_COMMENT)
     public ResponseEntity<?> deleteComment(@PathVariable String commentId) {
 
         DeleteCommentInput commentForDelete = DeleteCommentInput.builder().commendId(commentId).build();

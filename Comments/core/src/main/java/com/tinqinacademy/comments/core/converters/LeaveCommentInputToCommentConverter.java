@@ -16,11 +16,10 @@ public class LeaveCommentInputToCommentConverter implements Converter<LeaveComme
     public Comment convert(LeaveCommentInput source) {
         log.info("Converting LeaveCommentInput to Comment");
         Comment comment = Comment.builder()
-                .firstName(source.getFirstName())
-                .lastName(source.getLastName())
+                .roomId(UUID.fromString(source.getRoomId()))
+                .userId(UUID.fromString(source.getUserId()))
                 .content(source.getContent())
-                .roomId(UUID.randomUUID())
-                .publishDate(LocalDateTime.now())
+                .lastEditedBy(UUID.fromString(source.getUserId()))
                 .build();
         log.info("Converted LeaveCommentInput to Comment");
         return comment;

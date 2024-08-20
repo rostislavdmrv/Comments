@@ -1,7 +1,6 @@
 package com.tinqinacademy.comments.restexport;
 
 import com.tinqinacademy.comments.api.feignclientapiroutes.FeignClientApiRoutes;
-import com.tinqinacademy.comments.api.operations.deletecommentbyadmin.DeleteCommentInput;
 import com.tinqinacademy.comments.api.operations.deletecommentbyadmin.DeleteCommentOutput;
 import com.tinqinacademy.comments.api.operations.editcommentallbyadmin.EditCommentAllInput;
 import com.tinqinacademy.comments.api.operations.editcommentallbyadmin.EditCommentAllOutput;
@@ -13,6 +12,7 @@ import com.tinqinacademy.comments.api.operations.returnsallcommentsforcertainroo
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
+import org.springframework.cloud.openfeign.FeignClient;
 
 @Headers({"Content-Type: application/json"})
 public interface CommentsClient {

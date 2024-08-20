@@ -32,7 +32,7 @@ public class LeaveCommentProcessor extends BaseOperationProcessor<LeaveCommentIn
                     validateInput(input);
                     Comment comment = convertInputToComment(input);
                     Comment savedComment = saveComment(comment);
-                    LeaveCommentOutput output = buildLeaveCommentOutput(savedComment);
+                    LeaveCommentOutput output = conversionService.convert(savedComment, LeaveCommentOutput.class);
                     log.info("End leaving comment");
                     return output;
                 })
@@ -52,9 +52,5 @@ public class LeaveCommentProcessor extends BaseOperationProcessor<LeaveCommentIn
         return commentRepository.save(comment);
     }
 
-    private LeaveCommentOutput buildLeaveCommentOutput(Comment savedComment) {
-        return LeaveCommentOutput.builder()
-                .id(savedComment.getId().toString())
-                .build();
-    }
 }
+

@@ -34,7 +34,7 @@ public class RoomController extends BaseController {
             @ApiResponse(responseCode = "403", description = "Forbidden: You don't have permission to access comments for this room"),
             @ApiResponse(responseCode = "404", description = "Room or comments not found")
     })
-    @GetMapping(RestApiRoutes.USER_RETRIEVE_ALL_COMMENTS)
+    @GetMapping(RestApiRoutes.RETRIEVE_ALL_COMMENTS)
     public ResponseEntity<?> retrievesAllComments(@PathVariable String roomId){
 
         ReturnCommentInput input = ReturnCommentInput.builder()
@@ -50,7 +50,7 @@ public class RoomController extends BaseController {
             @ApiResponse(responseCode = "403", description = "Forbidden: You don't have permission to leave comments for this room"),
             @ApiResponse(responseCode = "404", description = "Room not found")
     })
-    @PostMapping(RestApiRoutes.USER_LEAVE_COMMENT)
+    @PostMapping(RestApiRoutes.LEAVE_COMMENT)
     public ResponseEntity<?> leaveComment(@PathVariable String roomId,@RequestBody LeaveCommentInput input){
         LeaveCommentInput  updatedInput = input.toBuilder()
                 .roomId(roomId)
@@ -66,11 +66,11 @@ public class RoomController extends BaseController {
             @ApiResponse(responseCode = "403", description = "Forbidden: You don't have permission to update comments for this room"),
             @ApiResponse(responseCode = "404", description = "Room or comment not found")
     })
-    @PatchMapping(RestApiRoutes.USER_UPDATE_COMMENT_CONTENT)
+    @PatchMapping(RestApiRoutes.UPDATE_COMMENT_CONTENT)
     public ResponseEntity<?> updateContentComment(@PathVariable("commentId") String commentId,@RequestBody EditCommentContentInput input) {
 
         EditCommentContentInput updatedInput = input.toBuilder()
-                .contentId(commentId)
+                .commentId(commentId)
                 .build();
 
         return handleWithStatus(editCommentContentOperation.process(updatedInput), HttpStatus.OK);
