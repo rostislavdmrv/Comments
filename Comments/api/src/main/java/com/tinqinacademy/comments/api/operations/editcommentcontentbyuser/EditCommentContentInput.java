@@ -16,12 +16,10 @@ import org.hibernate.validator.constraints.UUID;
 public class EditCommentContentInput implements OperationInput {
 
     @JsonIgnore
-    @NotBlank(message = "commentId cannot be blank")
     @UUID
     private String commentId;
 
     @JsonIgnore
-    @NotBlank
     @UUID
     private String userId;
 

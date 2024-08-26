@@ -32,7 +32,8 @@ public class RoomController extends BaseController {
             @ApiResponse(responseCode = "200", description = "Comments retrieved successfully"),
             @ApiResponse(responseCode = "400", description = "Invalid room ID provided"),
             @ApiResponse(responseCode = "403", description = "Forbidden: You don't have permission to access comments for this room"),
-            @ApiResponse(responseCode = "404", description = "Room or comments not found")
+            @ApiResponse(responseCode = "404", description = "Room or comments not found"),
+            @ApiResponse(responseCode = "422", description = "Validation error")
     })
     @GetMapping(RestApiRoutes.RETRIEVE_ALL_COMMENTS)
     public ResponseEntity<?> retrievesAllComments(@PathVariable String roomId){
@@ -48,7 +49,8 @@ public class RoomController extends BaseController {
             @ApiResponse(responseCode = "201", description = "Comment created successfully"),
             @ApiResponse(responseCode = "400", description = "Invalid room ID or comment content provided"),
             @ApiResponse(responseCode = "403", description = "Forbidden: You don't have permission to leave comments for this room"),
-            @ApiResponse(responseCode = "404", description = "Room not found")
+            @ApiResponse(responseCode = "404", description = "Room not found"),
+            @ApiResponse(responseCode = "422", description = "Validation error")
     })
     @PostMapping(RestApiRoutes.LEAVE_COMMENT)
     public ResponseEntity<?> leaveComment(@PathVariable String roomId,@RequestBody LeaveCommentInput input){
@@ -56,7 +58,7 @@ public class RoomController extends BaseController {
                 .roomId(roomId)
                 .build();
 
-        return handleWithStatus(leaveCommentOperation.process(updatedInput), HttpStatus.OK);
+        return handleWithStatus(leaveCommentOperation.process(updatedInput), HttpStatus.CREATED);
 
     }
     @Operation(summary = "Update comment content for a specific room", description = "Allows users to update the content of an existing comment associated with a specific room based on the provided room ID and comment ID")
@@ -64,7 +66,8 @@ public class RoomController extends BaseController {
             @ApiResponse(responseCode = "200", description = "Comment updated successfully"),
             @ApiResponse(responseCode = "400", description = "Invalid room ID or comment content provided"),
             @ApiResponse(responseCode = "403", description = "Forbidden: You don't have permission to update comments for this room"),
-            @ApiResponse(responseCode = "404", description = "Room or comment not found")
+            @ApiResponse(responseCode = "404", description = "Room or comment not found"),
+            @ApiResponse(responseCode = "422", description = "Validation error")
     })
     @PatchMapping(RestApiRoutes.UPDATE_COMMENT_CONTENT)
     public ResponseEntity<?> updateContentComment(@PathVariable("commentId") String commentId,@RequestBody EditCommentContentInput input) {
