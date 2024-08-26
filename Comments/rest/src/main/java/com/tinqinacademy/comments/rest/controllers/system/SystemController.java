@@ -28,7 +28,8 @@ public class SystemController extends BaseController {
             @ApiResponse(responseCode = "200", description = "Comment updated successfully"),
             @ApiResponse(responseCode = "400", description = "Invalid room ID or comment content provided"),
             @ApiResponse(responseCode = "403", description = "Forbidden: You don't have permission to update comments for this room"),
-            @ApiResponse(responseCode = "404", description = "Room or comment not found")
+            @ApiResponse(responseCode = "404", description = "Room or comment not found"),
+            @ApiResponse(responseCode = "422", description = "Validation error")
     })
 
     @PutMapping(RestApiRoutes.UPDATE_COMMENT)
@@ -44,7 +45,9 @@ public class SystemController extends BaseController {
             @ApiResponse(responseCode = "200", description = "Comment deleted successfully"),
             @ApiResponse(responseCode = "400", description = "Invalid room ID or comment ID provided"),
             @ApiResponse(responseCode = "403", description = "Forbidden: You don't have permission to delete comments for this room"),
-            @ApiResponse(responseCode = "404", description = "Room or comment not found")
+            @ApiResponse(responseCode = "404", description = "Room or comment not found"),
+            @ApiResponse(responseCode = "422", description = "Validation error")
+
     })
     @DeleteMapping(RestApiRoutes.DELETE_COMMENT)
     public ResponseEntity<?> deleteComment(@PathVariable String commentId) {

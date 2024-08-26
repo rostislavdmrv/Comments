@@ -11,18 +11,19 @@ import java.util.UUID;
 
 @Slf4j
 @Component
-public class EditCommentAllInputToCommentConverter implements Converter<EditCommentAllInput, Comment.CommentBuilder> {
+public class EditCommentAllInputToCommentConverter implements Converter<EditCommentAllInput, Comment> {
     @Override
-    public Comment.CommentBuilder convert(EditCommentAllInput source) {
+    public Comment convert(EditCommentAllInput source) {
         log.info("Start converting from EditCommentAllInput to Comment with input: {}", source);
 
-        Comment.CommentBuilder output = Comment.builder()
+        Comment output = Comment.builder()
                 .id(UUID.fromString(source.getCommentId()))
-                .content(source.getContent())
                 .roomId(UUID.fromString(source.getRoomId()))
                 .userId(UUID.fromString(source.getUserId()))
+                .content(source.getContent())
                 .lastEditedBy(UUID.fromString(source.getUserId()))
-                .lastEditedDate(LocalDateTime.now());
+                .lastEditedDate(LocalDateTime.now())
+                .build();
 
         log.info("Start converting from EditCommentAllInput to Comment with output: {}", output);
         return output;

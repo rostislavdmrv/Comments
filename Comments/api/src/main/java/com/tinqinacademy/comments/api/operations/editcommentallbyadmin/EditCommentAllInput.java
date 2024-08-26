@@ -14,7 +14,7 @@ import org.hibernate.validator.constraints.UUID;
 @AllArgsConstructor
 @Builder(toBuilder = true)
 public class EditCommentAllInput implements OperationInput {
-    @NotBlank(message = "Comment ID cannot be blank")
+
     @JsonIgnore
     private String commentId;
 
@@ -23,8 +23,8 @@ public class EditCommentAllInput implements OperationInput {
     private String roomId;
 
 
+
     @UUID(message = "User id must be in UUID syntax")
-    @NotBlank(message = "User id cannot be blank")
     private String userId;
 
     @NotBlank(message = "Content name cannot be blank")

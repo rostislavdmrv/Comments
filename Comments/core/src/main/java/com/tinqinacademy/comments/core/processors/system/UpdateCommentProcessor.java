@@ -35,8 +35,8 @@ public class UpdateCommentProcessor extends BaseOperationProcessor<EditCommentAl
         return Try.of(() -> {
                     validateInput(input);
                     Comment comment = retrieveComment(input.getCommentId());
-                    Comment commentToUpdate = conversionService.convert(comment, Comment.CommentBuilder.class)
-                            .publishDate(comment.getPublishDate()).build();
+                    Comment commentToUpdate = conversionService.convert(input, Comment.class);
+                    commentToUpdate.setPublishDate(comment.getPublishDate());
 
                     Comment updatedComment = saveComment(commentToUpdate);
                     EditCommentAllOutput output = conversionService.convert(updatedComment, EditCommentAllOutput.class);
